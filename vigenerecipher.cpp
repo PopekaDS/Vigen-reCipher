@@ -1,52 +1,8 @@
-﻿/*
-try:
-    import pyperclip  # pyperclip copies text to the clipboard.
-except ImportError:
-    pass  # If pyperclip is not installed, do nothing. It's no big deal.
-
-
-
-
-def main():
-
-
-
-
-
-    # Perform the encryption/decryption:
-    if myMode == 'encrypt':
-        translated = encryptMessage(myMessage, myKey)
-    elif myMode == 'decrypt':
-        translated = decryptMessage(myMessage, myKey)
-
-    print('%sed message:' % (myMode.title()))
-    print(translated)
-
-    try:
-        pyperclip.copy(translated)
-        print('Full %sed text copied to clipboard.' % (myMode))
-    except:
-        pass  # Do nothing if pyperclip wasn't installed.
-
-
-def encryptMessage(message, key):
-    """Encrypt the message using the key."""
-    return translateMessage(message, key, 'encrypt')
-
-
-def decryptMessage(message, key):
-    """Decrypt the message using the key."""
-    return translateMessage(message, key, 'decrypt')
-
-
-*/
-
-// Vigenère Cipher, by Al Sweigart al@inventwithpython.com
-// The Vigenère cipher is a polyalphabetic substitution cipher that was
+﻿// Vigenere Cipher, by Al Sweigart 
+// The Vigenere cipher is a polyalphabetic substitution cipher that was
 // powerful enough to remain unbroken for centuries.
-// More info at : https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
 // This code is available at https ://nostarch.com/big-book-small-python-programming
-// #80 VIGENÈRE CIPHER
+// #80 VIGENERE CIPHER
 
 #include <iostream>
 #include <string>
@@ -56,13 +12,15 @@ using namespace std;
 char upper(char symbol);
 char lower(char symbol);
 string translateMessage(string message, string key, string mode);
+string encryptMessage(string message, string key);
+string decryptMessage(string message, string key);
 
 // Every possible symbol that can be encrypted / decrypted:
 string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 int main() {
-    cout << "Vigenere Cipher, by Al Sweigart al@inventwithpython.com\n";
-    cout << "The Viegenère cipher is a polyalphabetic substitution cipher that was\n";
+    cout << "Vigenere Cipher, by Al Sweigart\n";
+    cout << "The Viegenere cipher is a polyalphabetic substitution cipher that was\n";
     cout << "powerful enough to remain unbroken for centuries.\n";
 
     // Let the user specify if they are encrypting or decrypting:
@@ -107,6 +65,17 @@ int main() {
     string myMessage;
     std::cout << "> ";
     getline(cin, myMessage);
+
+    // Perform the encryption/decryption:
+    string translated;
+    if (myMode == "encrypt") {
+        translated = encryptMessage(myMessage, myKey);
+    } else if (myMode == "decrypt") {
+        translated = decryptMessage(myMessage, myKey);
+    }
+
+    cout << myMode << "ed message:\n";
+    cout << translated << '\n';
 
     return 0;
 }
@@ -177,3 +146,12 @@ string translateMessage(string message, string key, string mode) {
     return translated;
 }
 
+string encryptMessage(string message, string key) {
+    // Encrypt the message using the key.
+    return translateMessage(message, key, "encrypt");
+}
+
+string decryptMessage(string message, string key) {
+    // Decrypt the message using the key.
+    return translateMessage(message, key, "decrypt");
+}
